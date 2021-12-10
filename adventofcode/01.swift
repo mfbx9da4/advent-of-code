@@ -8,7 +8,7 @@
 import Foundation
 
 func solve1() {
-    let path = Bundle.main.path(forResource: "1", ofType: "txt")
+    let path = Bundle.main.path(forResource: "01", ofType: "txt")
     let string = try! String(contentsOfFile: path!, encoding: String.Encoding.utf8)
     let lines = string.split(separator: "\n").map({ Int($0)! })
     var prev = lines[0] + lines[1] + lines[2]

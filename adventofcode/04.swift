@@ -72,7 +72,7 @@ struct Board {
 
 
 func solve4() {
-    let path = Bundle.main.path(forResource: "4", ofType: "txt")
+    let path = Bundle.main.path(forResource: "04", ofType: "txt")
     let string = try! String(contentsOfFile: path!, encoding: String.Encoding.utf8)
     let lines = string.split(separator: "\n")
     let numbers = lines[0].split(separator: ",").map({ Int($0)! })

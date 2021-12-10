@@ -15,7 +15,7 @@ func sumToN(_ n: Double) -> Double {
 
 
 func solve7() {
-    let path = Bundle.main.path(forResource: "7", ofType: "txt")
+    let path = Bundle.main.path(forResource: "07", ofType: "txt")
     let string = try! String(contentsOfFile: path!, encoding: String.Encoding.utf8)
     let numbers = string.split(separator: "\n")[0].split(separator: ",").map({ Int($0)! })
     print(sumToN(11))

@@ -102,7 +102,7 @@ func decode(_ config: [String: String], _ innie: String) -> Int {
 }
 
 func solve8 () {
-    let path = Bundle.main.path(forResource: "8", ofType: "txt")
+    let path = Bundle.main.path(forResource: "08", ofType: "txt")
     let string = try! String(contentsOfFile: path!, encoding: String.Encoding.utf8)
     let lines = string.split(separator: "\n")
     let allConfigs = configs()
