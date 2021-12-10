@@ -7,8 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD37EA4C27635E7C007CB2F3 /* 8.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD37EA4B27635E7C007CB2F3 /* 8.swift */; };
+		DD3971712763DC99008F5F6B /* 10.txt in Resources */ = {isa = PBXBuildFile; fileRef = DD3971702763DC99008F5F6B /* 10.txt */; };
+		DD3971732763DDD6008F5F6B /* 10-small.txt in Resources */ = {isa = PBXBuildFile; fileRef = DD3971722763DDD6008F5F6B /* 10-small.txt */; };
 		DD604FDB275FE77D00CE4A16 /* 7.txt in Resources */ = {isa = PBXBuildFile; fileRef = DD604FDA275FE77D00CE4A16 /* 7.txt */; };
 		DD604FDD275FE7B200CE4A16 /* 4.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD604FDC275FE7B200CE4A16 /* 4.swift */; };
+		DD604FDF2761618A00CE4A16 /* 7.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD604FDE2761618A00CE4A16 /* 7.swift */; };
+		DD604FE1276162E800CE4A16 /* 8.txt in Resources */ = {isa = PBXBuildFile; fileRef = DD604FE0276162E800CE4A16 /* 8.txt */; };
 		DDB7E438275B84BB0096D70A /* adventofcodeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB7E437275B84BB0096D70A /* adventofcodeApp.swift */; };
 		DDB7E43A275B84BB0096D70A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB7E439275B84BB0096D70A /* ContentView.swift */; };
 		DDB7E43C275B84BC0096D70A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DDB7E43B275B84BC0096D70A /* Assets.xcassets */; };
@@ -40,8 +45,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DD37EA4B27635E7C007CB2F3 /* 8.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 8.swift; sourceTree = "<group>"; };
+		DD3971702763DC99008F5F6B /* 10.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 10.txt; sourceTree = "<group>"; };
+		DD3971722763DDD6008F5F6B /* 10-small.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "10-small.txt"; sourceTree = "<group>"; };
 		DD604FDA275FE77D00CE4A16 /* 7.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 7.txt; sourceTree = "<group>"; };
 		DD604FDC275FE7B200CE4A16 /* 4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 4.swift; sourceTree = "<group>"; };
+		DD604FDE2761618A00CE4A16 /* 7.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 7.swift; sourceTree = "<group>"; };
+		DD604FE0276162E800CE4A16 /* 8.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 8.txt; sourceTree = "<group>"; };
 		DDB7E434275B84BB0096D70A /* adventofcode.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = adventofcode.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDB7E437275B84BB0096D70A /* adventofcodeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = adventofcodeApp.swift; sourceTree = "<group>"; };
 		DDB7E439275B84BB0096D70A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -106,16 +116,21 @@
 		DDB7E436275B84BB0096D70A /* adventofcode */ = {
 			isa = PBXGroup;
 			children = (
+				DD3971702763DC99008F5F6B /* 10.txt */,
+				DD604FE0276162E800CE4A16 /* 8.txt */,
 				DD604FDA275FE77D00CE4A16 /* 7.txt */,
 				DDB7E46A275D4A050096D70A /* 4.txt */,
 				DDB7E468275D3CDE0096D70A /* 4-small.txt */,
 				DDB7E461275B853C0096D70A /* 1.txt */,
 				DDB7E465275C3C430096D70A /* 1.swift */,
 				DDB7E437275B84BB0096D70A /* adventofcodeApp.swift */,
+				DD37EA4B27635E7C007CB2F3 /* 8.swift */,
 				DDB7E439275B84BB0096D70A /* ContentView.swift */,
 				DDB7E43B275B84BC0096D70A /* Assets.xcassets */,
 				DDB7E43D275B84BC0096D70A /* Preview Content */,
 				DD604FDC275FE7B200CE4A16 /* 4.swift */,
+				DD604FDE2761618A00CE4A16 /* 7.swift */,
+				DD3971722763DDD6008F5F6B /* 10-small.txt */,
 			);
 			path = adventofcode;
 			sourceTree = "<group>";
@@ -251,8 +266,11 @@
 			files = (
 				DD604FDB275FE77D00CE4A16 /* 7.txt in Resources */,
 				DDB7E46B275D4A050096D70A /* 4.txt in Resources */,
+				DD604FE1276162E800CE4A16 /* 8.txt in Resources */,
 				DDB7E462275B853C0096D70A /* 1.txt in Resources */,
 				DDB7E43F275B84BC0096D70A /* Preview Assets.xcassets in Resources */,
+				DD3971732763DDD6008F5F6B /* 10-small.txt in Resources */,
+				DD3971712763DC99008F5F6B /* 10.txt in Resources */,
 				DDB7E43C275B84BC0096D70A /* Assets.xcassets in Resources */,
 				DDB7E469275D3CDE0096D70A /* 4-small.txt in Resources */,
 			);
@@ -279,7 +297,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD37EA4C27635E7C007CB2F3 /* 8.swift in Sources */,
 				DDB7E466275C3C430096D70A /* 1.swift in Sources */,
+				DD604FDF2761618A00CE4A16 /* 7.swift in Sources */,
 				DDB7E43A275B84BB0096D70A /* ContentView.swift in Sources */,
 				DD604FDD275FE7B200CE4A16 /* 4.swift in Sources */,
 				DDB7E438275B84BB0096D70A /* adventofcodeApp.swift in Sources */,
