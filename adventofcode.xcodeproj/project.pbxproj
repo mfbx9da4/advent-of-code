@@ -11,6 +11,7 @@
 		DD3971712763DC99008F5F6B /* 10.txt in Resources */ = {isa = PBXBuildFile; fileRef = DD3971702763DC99008F5F6B /* 10.txt */; };
 		DD3971732763DDD6008F5F6B /* 10-small.txt in Resources */ = {isa = PBXBuildFile; fileRef = DD3971722763DDD6008F5F6B /* 10-small.txt */; };
 		DD3971752763EFE6008F5F6B /* 10.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3971742763EFE6008F5F6B /* 10.swift */; };
+		DD56B6E6277219E200EEBF9B /* 11.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD56B6E5277219E200EEBF9B /* 11.swift */; };
 		DD604FDB275FE77D00CE4A16 /* 07.txt in Resources */ = {isa = PBXBuildFile; fileRef = DD604FDA275FE77D00CE4A16 /* 07.txt */; };
 		DD604FDD275FE7B200CE4A16 /* 04.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD604FDC275FE7B200CE4A16 /* 04.swift */; };
 		DD604FDF2761618A00CE4A16 /* 07.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD604FDE2761618A00CE4A16 /* 07.swift */; };
@@ -50,6 +51,7 @@
 		DD3971702763DC99008F5F6B /* 10.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 10.txt; sourceTree = "<group>"; };
 		DD3971722763DDD6008F5F6B /* 10-small.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "10-small.txt"; sourceTree = "<group>"; };
 		DD3971742763EFE6008F5F6B /* 10.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 10.swift; sourceTree = "<group>"; };
+		DD56B6E5277219E200EEBF9B /* 11.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 11.swift; sourceTree = "<group>"; };
 		DD604FDA275FE77D00CE4A16 /* 07.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 07.txt; sourceTree = "<group>"; };
 		DD604FDC275FE7B200CE4A16 /* 04.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 04.swift; sourceTree = "<group>"; };
 		DD604FDE2761618A00CE4A16 /* 07.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 07.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				DD604FDE2761618A00CE4A16 /* 07.swift */,
 				DD37EA4B27635E7C007CB2F3 /* 08.swift */,
 				DD3971742763EFE6008F5F6B /* 10.swift */,
+				DD56B6E5277219E200EEBF9B /* 11.swift */,
 				DDB7E439275B84BB0096D70A /* ContentView.swift */,
 				DDB7E43B275B84BC0096D70A /* Assets.xcassets */,
 				DDB7E43D275B84BC0096D70A /* Preview Content */,
@@ -305,6 +308,7 @@
 				DD604FDF2761618A00CE4A16 /* 07.swift in Sources */,
 				DDB7E43A275B84BB0096D70A /* ContentView.swift in Sources */,
 				DD3971752763EFE6008F5F6B /* 10.swift in Sources */,
+				DD56B6E6277219E200EEBF9B /* 11.swift in Sources */,
 				DD604FDD275FE7B200CE4A16 /* 04.swift in Sources */,
 				DDB7E438275B84BB0096D70A /* adventofcodeApp.swift in Sources */,
 			);
@@ -474,7 +478,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -503,7 +507,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -525,7 +529,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -549,7 +553,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

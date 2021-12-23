@@ -9,14 +9,12 @@ import SwiftUI
 
 
 
-
-
 @main
 struct adventofcodeApp: App {
     var body: some Scene {
-        solve10()
+        solve11()
         return WindowGroup {
-            ContentView()
+            MainView()
         }
     }
 }
