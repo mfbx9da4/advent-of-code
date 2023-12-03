@@ -30,8 +30,8 @@ for line in inputArray {
 
 
 // 1. Find all the numbers
-// 2. Iterate through each number -> keep or not?
-// 3. Skip iterated numbers
+// 2. BFS queue iterating through each number
+// 3. Try to find a neighbouring * and then a neighbouring number, if found remove from queue
 
 
 struct Node: Hashable {
