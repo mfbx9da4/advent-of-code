@@ -267,7 +267,6 @@ const ranges = [
 
 console.log("ranges", ranges);
 
-let iterations = 0;
 let minItem = Infinity;
 for (const range of ranges) {
   for (let seed = range.start; seed < range.start + range.length; seed++) {
