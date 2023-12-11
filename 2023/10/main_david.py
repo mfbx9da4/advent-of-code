@@ -457,17 +457,17 @@ print("Path", len(path_cells))
 assert len(path_cells) == len(path) == len(set(path_cells))
 print("Part 2 answer:", total - len(outsiders) - len(path_cells))
 
-# print("Board")
-# [print("".join([c for c in row])) for row in board]
-# print("Path")
-# [print("".join(['X' if Cell(r, c) in path_cells else '.' for c, _ in enumerate(row)]))
+print("Board")
+[print("".join([c for c in row])) for row in board]
+print("Path")
+[print("".join(['X' if Cell(r, c) in path_cells else '.' for c, _ in enumerate(row)]))
+ for r, row in enumerate(board)]
+print("Outsiders")
+[print("".join(['X' if Cell(r, c) in outsiders else '.' for c, _ in enumerate(row)]))
+ for r, row in enumerate(board)]
+# print("Insiders")
+# [print("".join([str('X' if Cell(r, c) in insiders else '.') for c, _ in enumerate(row)]))
 #  for r, row in enumerate(board)]
-# print("Outsiders")
-# [print("".join(['X' if Cell(r, c) in outsiders else '.' for c, _ in enumerate(row)]))
-#  for r, row in enumerate(board)]
-# # print("Insiders")
-# # [print("".join([str('X' if Cell(r, c) in insiders else '.') for c, _ in enumerate(row)]))
-# #  for r, row in enumerate(board)]
 
 # print('Union insiders and outsiders')
 # [print("".join([str('X' if Cell(r, c) in set(path_cells).union(outsiders) else '.') for c, _ in enumerate(row)]))
