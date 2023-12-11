@@ -310,7 +310,6 @@ def find_path_from_start():
 
 
 path = find_path_from_start()
-print("Path", len(path))
 path_cells = [n.cell for n in path]
 
 
@@ -324,7 +323,6 @@ for r, row in enumerate(board):
         if c == 0 or c == len(row) - 1 or r == 0 or r == len(board) - 1:
             first_outsiders.append(node)
 assert first_outsiders is not None
-print("First outsiders", len(first_outsiders))
 
 # 3. Flood fill from those outsider cells
 outsiders = set(first_outsiders)
@@ -337,7 +335,6 @@ while len(open_list) > 0:
             outsiders.add(next_cell)
             open_list.append(next_cell)
 
-print("Outsiders", len(outsiders))
 
 # 4. Now find a cell on the path next to an outsider, walk along it always filling the inside
 
@@ -372,36 +369,13 @@ for node in path:
         first_node = node
         break
 
-# We need to assume the directions are correct ie
-# we must be travelling right
-# if first_node.direction != "right":
-#     # create a new path by reversing the directions in the path
-#     node = Node(first_node.cell, 0, 'right', 'right')
-#     path = [start_cell]
-#     while True:
-#         char = board[node.cell.row][node.cell.col]
-#         direction = pipes[char].get(node.prev_direction)
-#         path[-1].direction = direction
-#         next_cell = move(node.cell, direction)
-#         if not next_cell:
-#             raise Exception("Dead end")
-#         if next_cell == first_node.cell:
-#             break
-#     assert set(path_cells) == set([n.cell for n in path])
-#     path_cells = [n.cell for n in path]
 
-
-print("First node", first_node)
 assert first_node is not None
 
-# Walk along the path and fill anything unmarked
+# Walk along the path and mark any outsiders unmarked
 
 start_index = path.index(first_node)
 insiders = set([n.cell for n in path])
-
-print("Outsiders before")
-# [print("".join(['X' if Cell(r, c) in outsiders else '.' for c,
-#                 _ in enumerate(row)])) for r, row in enumerate(board)]
 
 for i in range(len(path)):
     index = (start_index + i) % len(path)
@@ -434,9 +408,6 @@ for i in range(len(path)):
         if neighbour and neighbour not in insiders:
             outsiders.add(neighbour)
 
-    # print("Outsiders after node", node)
-    # [print("".join(['X' if Cell(r, c) in outsiders else '.' for c,
-    #        _ in enumerate(row)])) for r, row in enumerate(board)]
 
 # Flood fill again
 outsiders = set(outsiders)
@@ -488,49 +459,3 @@ print("Outsiders")
 
 
 # endregion
-
-# .XXXXXXXXXXXXXXXXXXX
-# .XXXXXXXXXXXXXXXXXXX
-# .XXXXXXXXXXXXXXXXXX.
-# XXXXXXXXXXXXXX.XXXX.
-# XXXXXXXXXX....XXXX..
-# ...XXXXXXXX...XX....
-# ..XXXXXXXXXXX..XXXXX
-# ..XXXXXXXXXXXXXXXXXX
-# .....XXXXXXXXXXXXXXX
-# .....XXXXXXXXXXXXX..
-
-# X...................
-# X...................
-# X..................X
-# ...................X
-# ..................XX
-# XXX.............XXXX
-# XX..................
-# XX..................
-# XXXXX...............
-# XXXXX.............XX
-
-
-# XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-# XXXXXXXXXXXXXXXX.XXXXXX.XXXXXXXXX
-# XXXXXXXXXXXXXXX...XXXX..XXXXXXXXX
-# XXXXXXXXXXXXXX.........XXXXXXXXXX
-# XXXXXXXXXXXXXX.........XXXXXXXXXX
-# XXXXXXXXXXXXX........XXXXXXXXXXXX
-# XXXXXXXXXXXX......XXXXXXXXXXXXXXX
-# XXXXXXXXXXX......XXXXXXXXXXXXXXXX
-# XXXXXXX..........XXXXXXXXXXXXXXXX
-# XXXXXX...........XXXXXXXXXXXXXXXX
-# XXXXXXXX..........XXXXXXXXXXXXXXX
-# XXXXXXXXX.........XXXXXXXXXXXXXXX
-# XXXXXXXXX.........XXXXXXXXXXXXXXX
-# XXXXXXXXXX.........XXXXXXXXXXXXXX
-# XXXXXXXXXX...........XXXXXXXXXXXX
-# XXXXXXXXXXX.........XXXXXXXXXXXXX
-# XXXXXXXXXXXXX.......XXXXXXXXXXXXX
-# XXXXXXXXXXXXXX..XX...XXXXXXXXXXXX
-# XXXXXXXXXXXXXXXXXXX..XXXXXXXXXXXX
-# XXXXXXXXXXXXXXXXXXX..XXXXXXXXXXXX
-# XXXXXXXXXXXXXXXXXXXX.XXXXXXXXXXXX
-# XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
