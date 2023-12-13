@@ -2041,22 +2041,20 @@ for i, line in enumerate(input.splitlines()):
             if len(expected) == 0 or (len(expected) == 1 and expected[0] == 0):
                 ret = 1
         else:
-            char, *next_chars = chars
+            char, *chars = chars
             if char == "?":
-                left = traverse((".", *next_chars), expected,
-                                previous_char)
-                right = traverse(("#", *next_chars), expected,
-                                 previous_char)
+                left = traverse((".", *chars), expected, previous_char)
+                right = traverse(("#", *chars), expected, previous_char)
                 ret = left + right
             elif char == "." and previous_char == ".":
-                ret = traverse(next_chars, expected, char)
+                ret = traverse(chars, expected, char)
             elif char == "." and previous_char == "#":
                 if len(expected) > 0 and expected[0] == 0:
-                    ret = traverse(next_chars, expected[1:], char)
+                    ret = traverse(chars, expected[1:], char)
             elif char == "#":
                 if len(expected) > 0 and expected[0] > 0:
                     ret = traverse(
-                        next_chars, [expected[0] - 1, *expected[1:]], char)
+                        chars, [expected[0] - 1, *expected[1:]], char)
         cache[key] = ret
         return ret
 
