@@ -1,3 +1,4 @@
+import concurrent.futures
 from dataclasses import dataclass
 from typing import List
 import itertools
@@ -2052,10 +2053,11 @@ lines = []
 for line in input.splitlines():
     if line == "":
         continue
-    chars, expected = line.split(" ")
-    expected = [int(x) for x in expected.split(",")]
-    line = Line(list(chars), expected)
-    lines.append(line)
+    chars_str, expected = line.split(" ")
+    factor = 5
+    expected = [int(x) for x in expected.split(",")] * factor
+    chars = list('?'.join([chars_str] * factor))
+    lines.append(Line(chars, expected))
 
 # 1. Parse each line
 # 2. Do every possible value for each ? -> check if it satisfies the requirements
@@ -2086,11 +2088,24 @@ def variants(line: Line):
         yield copy
 
 
-ways = 0
-for i, line in enumerate(lines):
+def count_variants(line: Line):
+    ways = 0
     for variant in variants(line):
         if checksum(variant) == line.expected:
             ways += 1
+    return ways
 
 
-print('Part 1 answer:', ways)
+def main():
+    ways = 0
+    i = 0
+    with concurrent.futures.ProcessPoolExecutor() as executor:
+        for result in executor.map(count_variants, lines):
+            i += 1
+            ways += result
+            print(i)
+    print('Part 1 answer:', ways)
+
+
+if __name__ == "__main__":
+    main()
