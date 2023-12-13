@@ -2033,15 +2033,15 @@ for i, line in enumerate(input.splitlines()):
     cache = {}
 
     def traverse(chars, expected, previous_char):
-        if (chars, expected, previous_char) in cache:
-            return cache[(chars, expected, previous_char)]
+        key = (tuple(chars), tuple(expected), previous_char)
+        if key in cache:
+            return cache[key]
         ret = 0
         if len(chars) == 0:
             if len(expected) == 0 or (len(expected) == 1 and expected[0] == 0):
                 ret = 1
         else:
             char, *next_chars = chars
-            next_chars = tuple(next_chars)
             if char == "?":
                 left = traverse((".", *next_chars), expected,
                                 previous_char)
@@ -2052,12 +2052,12 @@ for i, line in enumerate(input.splitlines()):
                 ret = traverse(next_chars, expected, char)
             elif char == "." and previous_char == "#":
                 if len(expected) > 0 and expected[0] == 0:
-                    ret = traverse(next_chars, tuple(expected[1:]), char)
+                    ret = traverse(next_chars, expected[1:], char)
             elif char == "#":
                 if len(expected) > 0 and expected[0] > 0:
-                    ret = traverse(next_chars, tuple(
-                        [expected[0] - 1, *expected[1:]]), char)
-        cache[(chars, expected, previous_char)] = ret
+                    ret = traverse(
+                        next_chars, [expected[0] - 1, *expected[1:]], char)
+        cache[key] = ret
         return ret
 
     ways += traverse(chars, expected, ".")
