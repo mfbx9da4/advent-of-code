@@ -230,18 +230,18 @@ input = r"""
 
 
 # Part 1 example
-# input = r"""
-# .|...\....
-# |.-.\.....
-# .....|-...
-# ........|.
-# ..........
-# .........\
-# ..../.\\..
-# .-.-/..|..
-# .|....-|.\
-# ..//.|....
-# """
+input = r"""
+.|...\....
+|.-.\.....
+.....|-...
+........|.
+..........
+.........\
+..../.\\..
+.-.-/..|..
+.|....-|.\
+..//.|....
+"""
 
 print(input)
 
@@ -256,22 +256,16 @@ def board_str(board):
     return '\n'.join(''.join(row) for row in board)
 
 
-@dataclass
+@dataclass(frozen=True)
 class Cell:
     r: int
     c: int
 
-    def __hash__(self):
-        return hash((self.r, self.c))
 
-
-@dataclass
+@dataclass(frozen=True)
 class Node:
     cell: Cell
     direction: str
-
-    def __hash__(self):
-        return hash(self.cell)
 
 
 def in_bounds(r, c):
