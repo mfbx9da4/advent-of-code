@@ -680,26 +680,26 @@ U 6 (#298013)
 """
 
 # Leandro's input
-input = """
-"""
+# input = """
+# """
 
-# Test input
-input = """
-R 6 (#70c710)
-D 5 (#0dc571)
-L 2 (#5713f0)
-D 2 (#d2c081)
-R 2 (#59c680)
-D 2 (#411b91)
-L 5 (#8ceee2)
-U 2 (#caa173)
-L 1 (#1b58a2)
-U 2 (#caa171)
-R 2 (#7807d2)
-U 3 (#a77fa3)
-L 2 (#015232)
-U 2 (#7a21e3)
-"""
+# # Test input
+# input = """
+# R 6 (#70c710)
+# D 5 (#0dc571)
+# L 2 (#5713f0)
+# D 2 (#d2c081)
+# R 2 (#59c680)
+# D 2 (#411b91)
+# L 5 (#8ceee2)
+# U 2 (#caa173)
+# L 1 (#1b58a2)
+# U 2 (#caa171)
+# R 2 (#7807d2)
+# U 3 (#a77fa3)
+# L 2 (#015232)
+# U 2 (#7a21e3)
+# """
 
 # input = """
 # R 2 (#000000)
@@ -752,7 +752,6 @@ U 2 (#7a21e3)
 class Instruction:
     direction: str
     distance: int
-    color: str
 
 
 @dataclass(frozen=True)
@@ -765,51 +764,29 @@ instructions = []
 for line in input.splitlines():
     if line == "":
         continue
-    direction, distance, color = line.split()
-    color = color[1:-1]
-    instructions.append(Instruction(direction, int(distance), color))
+    _, _, color = line.split()
+    color = color[2:-1]
+    distance_as_hex_str = color[:5]
+    direction_str_to_direction = {"0": "R", "1": "D", "2": "L", "3": "U", }
+    direction = direction_str_to_direction[color[5]]
+    distance = int(distance_as_hex_str, 16)
+    instructions.append(Instruction(direction, distance))
 
 path = [Cell(0, 0)]
-area_clockwise = 0
-area_counterclockwise = 0
+area = 1  # 1 for the starting cell
 for instruction in instructions:
     last_cell = path[-1]
     x, y = last_cell.x, last_cell.y
     if instruction.direction == "R":
         path.append(Cell(x + instruction.distance, y))
+        area += instruction.distance
     elif instruction.direction == "L":
         path.append(Cell(x - instruction.distance, y))
     elif instruction.direction == "U":
         path.append(Cell(x, y - instruction.distance))
-        area_clockwise -= (x + (-1 if x < 0 else 0)) * instruction.distance
-        area_counterclockwise += (x + 1) * \
-            (instruction.distance + 1)
+        area -= instruction.distance * (x - 1)
     elif instruction.direction == "D":
         path.append(Cell(x, y + instruction.distance))
-        area_clockwise += (x + 1) * \
-            (instruction.distance + 1)
-        area_counterclockwise -= (x + (-1 if x < 0 else 0)
-                                  ) * instruction.distance
+        area += instruction.distance * x
 
-
-print('area_clockwise', area_clockwise)
-print('area_counterclockwise', area_counterclockwise)
-
-print(max(abs(area_clockwise), abs(area_counterclockwise)))
-# Find the inside of the path using Green's theorem
-
-
-# def area(pts):
-#     'Area of cross-section.'
-#     if pts[0] != pts[-1]:
-#         pts = pts + pts[:1]
-#     x = [c[0] for c in pts]
-#     y = [c[1] for c in pts]
-#     s = 0
-#     for i in range(len(pts) - 1):
-#         s += x[i]*y[i+1] - x[i+1]*y[i]
-#     return s/2
-
-
-# pts = [(cell.x, cell.y) for cell in path]
-# print(area(pts))
+print(area)

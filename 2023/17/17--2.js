@@ -1,3 +1,4 @@
+let input;
 input = `
 124223341431231241232125113311132141242622413151336162425123616224422443661624336241465321661235163421625333241321313543325254114432334411141
 314414312413111315445554231121544134261246142554656264256525333166254234251153113516514464332553633213534213313122143442534453121124144143423
@@ -158,103 +159,140 @@ input = `
 // 4322674655533
 // `;
 
-function parseInput() {
-  const board = [];
-  input.split("\n").forEach((line) => {
-    if (line.length === 0) return;
-    board.push(line.split("").map((c) => Number(c)));
+// input = `
+// 111111111111
+// 999999999991
+// 999999999991
+// 999999999991
+// 999999999991
+// `;
+
+// input = `
+// 111111111111
+// 999999999991
+// 999999999991
+// 999999999991
+// 999999999991
+// 999999999991
+// 999999999991
+// 999999999991
+// 999999999991
+// 999999999991
+// 999999999991
+// `;
+
+const minimumStepsInDirection = 4;
+const maximumStepsInDirection = 10;
+
+const board = input
+  .trim()
+  .split("\n")
+  .map((line) => line.split("").map((numberString) => Number(numberString)));
+
+const statesToExplore = [
+  {
+    previousCoordinates: new Set(),
+    coordinate: { x: 0, y: 0 },
+    direction: undefined,
+    stepsInDirection: 0,
+    accumulatedHeatLoss: undefined,
+  },
+];
+const statesExplored = new Set();
+while (statesToExplore.length > 0) {
+  const stateToExplore = statesToExplore.pop();
+  const stateToExploreSerialized = JSON.stringify({
+    coordinate: stateToExplore.coordinate,
+    direction: stateToExplore.direction,
+    stepsInDirection: stateToExplore.stepsInDirection,
   });
-  return board;
-}
-
-let board = parseInput();
-
-const inBounds = (r, c) =>
-  r >= 0 && c >= 0 && r < board.length && c < board[0].length;
-
-const start = {
-  r: 0,
-  c: 0,
-  stepsInDirection: 1,
-  accumulatedHeatLoss: 0,
-  prevDirection: undefined,
-  path: [],
-  pathSet: new Set([]),
-};
-
-start.path.push(start);
-start.pathSet.add(`${start.r},${start.c}`);
-const openList = [start];
-const maxStepsInDirection = 3;
-const seen = new Set([]);
-let path = [];
-while (openList.length) {
-  openList.sort((a, b) => a.accumulatedHeatLoss - b.accumulatedHeatLoss);
-  const node = openList.shift();
-  // console.log("node", node.r, node.c);
-  // printPath(node.path);
-  const nodeKey = `${node.r},${node.c},${node.prevDirection},${node.stepsInDirection}`;
-  if (seen.has(nodeKey)) continue;
-  seen.add(nodeKey);
-  if (node.r === board.length - 1 && node.c === board[0].length - 1) {
-    console.log(node.accumulatedHeatLoss);
-    path = node.path;
+  if (statesExplored.has(stateToExploreSerialized)) continue;
+  statesExplored.add(stateToExploreSerialized);
+  const accumulatedHeatLoss =
+    stateToExplore.accumulatedHeatLoss === undefined
+      ? 0
+      : stateToExplore.accumulatedHeatLoss +
+        board[stateToExplore.coordinate.y][stateToExplore.coordinate.x];
+  if (
+    stateToExplore.coordinate.x === board[0].length - 1 &&
+    stateToExplore.coordinate.y === board.length - 1 &&
+    minimumStepsInDirection <= stateToExplore.stepsInDirection
+  ) {
+    console.log(accumulatedHeatLoss);
     break;
   }
-
-  const neighbors = {
-    up: { r: node.r - 1, c: node.c },
-    down: { r: node.r + 1, c: node.c },
-    left: { r: node.r, c: node.c - 1 },
-    right: { r: node.r, c: node.c + 1 },
-  };
-  for (const [direction, neighbor] of Object.entries(neighbors)) {
-    if (!inBounds(neighbor.r, neighbor.c)) continue;
-    const heatLoss = board[neighbor.r][neighbor.c];
-
-    const child = {
-      ...neighbor,
-      prevDirection: direction,
-      accumulatedHeatLoss: node.accumulatedHeatLoss + heatLoss,
+  const previousCoordinates = new Set([
+    ...stateToExplore.previousCoordinates,
+    JSON.stringify(stateToExplore.coordinate),
+  ]);
+  for (const nextStateToExplore of [
+    {
+      previousCoordinates,
+      coordinate: {
+        x: stateToExplore.coordinate.x,
+        y: stateToExplore.coordinate.y - 1,
+      },
+      direction: "up",
       stepsInDirection:
-        node.prevDirection === direction ? node.stepsInDirection + 1 : 1,
-      path: [...node.path],
-      pathSet: new Set([...node.pathSet]),
-    };
-    if (node.pathSet.has(`${child.r},${child.c}`)) {
-      continue;
-    }
-    child.path.push(child);
-    child.pathSet.add(`${child.r},${child.c}`);
-    if (child.stepsInDirection > maxStepsInDirection) {
-      continue;
-    }
-    openList.push(child);
-  }
+        stateToExplore.direction === "up"
+          ? stateToExplore.stepsInDirection + 1
+          : 1,
+      accumulatedHeatLoss,
+    },
+    {
+      previousCoordinates,
+      coordinate: {
+        x: stateToExplore.coordinate.x + 1,
+        y: stateToExplore.coordinate.y,
+      },
+      direction: "right",
+      stepsInDirection:
+        stateToExplore.direction === "right"
+          ? stateToExplore.stepsInDirection + 1
+          : 1,
+      accumulatedHeatLoss,
+    },
+    {
+      previousCoordinates,
+      coordinate: {
+        x: stateToExplore.coordinate.x,
+        y: stateToExplore.coordinate.y + 1,
+      },
+      direction: "down",
+      stepsInDirection:
+        stateToExplore.direction === "down"
+          ? stateToExplore.stepsInDirection + 1
+          : 1,
+      accumulatedHeatLoss,
+    },
+    {
+      previousCoordinates,
+      coordinate: {
+        x: stateToExplore.coordinate.x - 1,
+        y: stateToExplore.coordinate.y,
+      },
+      direction: "left",
+      stepsInDirection:
+        stateToExplore.direction === "left"
+          ? stateToExplore.stepsInDirection + 1
+          : 1,
+      accumulatedHeatLoss,
+    },
+  ])
+    if (
+      0 <= nextStateToExplore.coordinate.x &&
+      nextStateToExplore.coordinate.x < board[0].length &&
+      0 <= nextStateToExplore.coordinate.y &&
+      nextStateToExplore.coordinate.y < board.length &&
+      !previousCoordinates.has(JSON.stringify(nextStateToExplore.coordinate)) &&
+      (stateToExplore.direction === undefined ||
+        stateToExplore.direction === nextStateToExplore.direction ||
+        minimumStepsInDirection <= stateToExplore.stepsInDirection) &&
+      nextStateToExplore.stepsInDirection <= maximumStepsInDirection
+    )
+      statesToExplore.push(nextStateToExplore);
+  statesToExplore.sort(
+    (stateToExploreA, stateToExploreB) =>
+      stateToExploreB.accumulatedHeatLoss - stateToExploreA.accumulatedHeatLoss
+  );
 }
-
-function printPath(p) {
-  for (const [r, row] of board.entries()) {
-    let rowString = "";
-    for (const [c, cell] of row.entries()) {
-      const node = p.find((node) => node.r === r && node.c === c);
-      if (node) {
-        rowString +=
-          node.prevDirection === "up"
-            ? "^"
-            : node.prevDirection === "down"
-            ? "v"
-            : node.prevDirection === "left"
-            ? "<"
-            : node.prevDirection === "right"
-            ? ">"
-            : "X";
-      } else {
-        rowString += ".";
-      }
-    }
-    console.log(rowString);
-  }
-}
-
-printPath(path);

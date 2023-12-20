@@ -157,6 +157,13 @@ input = `
 // 2546548887735
 // 4322674655533
 // `;
+// input = `
+// 111111111111
+// 999999999991
+// 999999999991
+// 999999999991
+// 999999999991
+// `;
 
 function parseInput() {
   const board = [];
@@ -185,18 +192,21 @@ const start = {
 start.path.push(start);
 start.pathSet.add(`${start.r},${start.c}`);
 const openList = [start];
-const maxStepsInDirection = 3;
+const maxStepsInDirection = 10;
+const minStepsInDirection = 4;
 const seen = new Set([]);
 let path = [];
 while (openList.length) {
-  openList.sort((a, b) => a.accumulatedHeatLoss - b.accumulatedHeatLoss);
-  const node = openList.shift();
-  // console.log("node", node.r, node.c);
-  // printPath(node.path);
+  openList.sort((b, a) => a.accumulatedHeatLoss - b.accumulatedHeatLoss);
+  const node = openList.pop();
   const nodeKey = `${node.r},${node.c},${node.prevDirection},${node.stepsInDirection}`;
   if (seen.has(nodeKey)) continue;
   seen.add(nodeKey);
-  if (node.r === board.length - 1 && node.c === board[0].length - 1) {
+  if (
+    node.r === board.length - 1 &&
+    node.c === board[0].length - 1 &&
+    node.stepsInDirection >= minStepsInDirection
+  ) {
     console.log(node.accumulatedHeatLoss);
     path = node.path;
     break;
@@ -210,8 +220,15 @@ while (openList.length) {
   };
   for (const [direction, neighbor] of Object.entries(neighbors)) {
     if (!inBounds(neighbor.r, neighbor.c)) continue;
-    const heatLoss = board[neighbor.r][neighbor.c];
 
+    if (
+      direction != (node.prevDirection ?? direction) &&
+      node.stepsInDirection < minStepsInDirection
+    ) {
+      continue; // We can't change direction yet
+    }
+
+    const heatLoss = board[neighbor.r][neighbor.c];
     const child = {
       ...neighbor,
       prevDirection: direction,
@@ -222,12 +239,12 @@ while (openList.length) {
       pathSet: new Set([...node.pathSet]),
     };
     if (node.pathSet.has(`${child.r},${child.c}`)) {
-      continue;
+      continue; // We've already been here
     }
     child.path.push(child);
     child.pathSet.add(`${child.r},${child.c}`);
     if (child.stepsInDirection > maxStepsInDirection) {
-      continue;
+      continue; // We can't continue in this direction
     }
     openList.push(child);
   }
