@@ -272,7 +272,6 @@ function pressButton() {
   while (openList.length > 0) {
     const module = openList.shift()!;
     const signal = module.output;
-    // console.log(module.name, signal);
     for (const child of graph.get(module) ?? []) {
       assert(child.type !== "button", "button should not be in graph");
       if (signal === "low") lowCount++;

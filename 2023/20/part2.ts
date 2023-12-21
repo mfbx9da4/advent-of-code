@@ -133,13 +133,13 @@ broadcaster -> rz, fp, kv, fd
 // `;
 
 // // Example 2
-input = `
-broadcaster -> a
-%a -> inv, con
-&inv -> b
-%b -> con
-&con -> output
-`;
+// input = `
+// broadcaster -> a
+// %a -> inv, con
+// &inv -> b
+// %b -> con
+// &con -> output
+// `;
 
 // Plan:
 // 1. Construct the graph
@@ -305,25 +305,36 @@ for (let i = 0; i < Infinity; i++) {
   //     .filter((x) => x !== undefined)
   //     .reduce((s, x) => s + (x === "high" ? "." : "#"), "")
   // );
+  // console.log(
+  //   [...graph.keys()]
+  //     .map((module) => {
+  //       if (module.type === "%") return module.state === "high" ? "▲" : ".";
+  //       if (module.type === "&") {
+  //         return (
+  //           [...module.inputs.values()]
+  //             .map((signal) => (signal === "high" ? "#" : "."))
+  //             .join("") + (module.output === "high" ? "◉" : ".")
+  //         );
+  //       }
+  //       return "";
+  //     })
+  //     .join("")
+  // );
   console.log(
     [...graph.keys()]
+      .sort((a, b) => a.name.localeCompare(b.name))
       .map((module) => {
-        if (module.type === "%") return module.state === "high" ? "*" : ".";
-        if (module.type === "&") {
-          return (
-            [...module.inputs.values()]
-              .map((signal) => (signal === "high" ? "#" : "."))
-              .join("") + (module.output === "high" ? "§" : ".")
-          );
-        }
-        return "";
+        if (module.output === "high") return module.name;
+        return "  ";
       })
+      .filter((x) => x)
       .join("")
   );
 
   if (pressButton()) {
     // TODO: REENABLE
     // console.log("------- i", i);
+    // break
   }
   if (i > 20) break;
 }
