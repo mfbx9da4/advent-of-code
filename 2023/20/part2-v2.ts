@@ -159,6 +159,15 @@ broadcaster -> a
 %j -> con
 &con -> output
 `;
+input = `
+broadcaster -> a
+%a -> b
+%b -> c
+%c -> d
+%d -> e
+%e -> con
+&con -> output
+`;
 
 // Plan:
 // 1. Construct the graph
