@@ -2815,8 +2815,8 @@ for (const piece of pieces) {
 let canBeDisintegratedCount = 0;
 for (const piece of pieces) {
   let canBeDisintegrated = true;
-  for (const supportingPiece of piece.supporting) {
-    if (supportingPiece.supportedBy.size === 1) {
+  for (const pieceSupportedByMe of piece.supporting) {
+    if (pieceSupportedByMe.supportedBy.size === 1) {
       canBeDisintegrated = false;
       break;
     }
