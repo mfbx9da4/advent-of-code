@@ -376,7 +376,7 @@ async function main() {
   console.log("junctionNodes", junctionNodes);
   console.log("junctionNodesGraphs", junctionNodesGraphs);
 
-  // Now find the longest path from start to end
+  // Now find the longest path from start to end, negate all the distances so we can use Djikstra's
   let minDistance = Infinity;
   let minPath: Array<string> = [];
   let openList = [
@@ -387,7 +387,7 @@ async function main() {
     const current = openList.shift()!;
     if (current.position === endNodePositionKey) {
       if (current.distance < minDistance) {
-        console.log("Found path", Math.abs(current.distance));
+        console.log("Found new longest path", Math.abs(current.distance));
         minDistance = current.distance;
         minPath = current.path;
       }
@@ -410,7 +410,7 @@ async function main() {
       });
     }
   }
-  console.log("maxDistance", Math.abs(minDistance));
+  console.log("Final answer", Math.abs(minDistance));
   visualizePath(minPath);
 }
 main();
