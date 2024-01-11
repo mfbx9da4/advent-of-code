@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Life</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="life"></canvas>
+    <script>
+      const canvas = document.getElementById("life");
+      const m = canvas.getContext("2d");
+      const draw = {
+        square: (x, y, color, w) => draw.rect(x, y, color, w, w),
+        rect: (x, y, color, w, h) => {
+          m.fillStyle = color;
+          m.fillRect(x, y, w, h);
+        },
+        dot: (x, y, color, r) => {
+          m.fillStyle = color;
+          m.beginPath();
+          m.arc(x, y, r, 0, 2 * Math.PI);
+          m.fill();
+        },
+      };
+
+      const particles = [];
+      const particle = (x, y, color) => {
+        return {
+          x: x,
+          y: y,
+          color: color,
+          vx: Math.random() * 2,
+          vy: Math.random() * 2,
+          size: 5,
+        };
+      };
+
+      const random = (min, max) => {
+        return Math.random() * (max - min) + min;
+      };
+
+      const create = (number, color) => {
+        const group = [];
+        for (let i = 0; i < number; i++) {
+          group.push(
+            particle(random(0, innerWidth), random(0, innerHeight), color)
+          );
+          particles.push(group[i]);
+        }
+        return group;
+      };
+
+      const rule = (particles1, particles2, g) => {
+        for (let i = 0; i < particles1.length; i++) {
+          let fx = 0;
+          let fy = 0;
+          let a = particles1[i];
+          for (let j = 0; j < particles2.length; j++) {
+            let b = particles2[j];
+            const dx = a.x - b.x;
+            const dy = a.y - b.y;
+            const d = Math.sqrt(dx * dx + dy * dy);
+            if (d > 0 && d < a.size * 15) {
+              const F = g * (1 / d);
+              fx += F * dx;
+              fy += F * dy;
+            }
+          }
+          a.vx = (a.vx + fx) * 0.5;
+          a.vy = (a.vy + fy) * 0.5;
+          a.x += a.vx;
+          a.y += a.vy;
+          if (0 >= a.x || a.x >= innerWidth) {
+            a.vx *= -1;
+            a.x = Math.max(0, Math.min(a.x, innerWidth));
+          }
+          if (0 >= a.y || a.y >= innerHeight) {
+            a.vy *= -1;
+            a.y = Math.max(0, Math.min(a.y, innerHeight));
+          }
+        }
+      };
+
+      const yellow = create(200, "yellow");
+      const red = create(200, "red");
+
+      const update = () => {
+        rule(red, red, -1);
+        rule(red, yellow, 0.1);
+        rule(yellow, red, 0.1);
+        rule(yellow, yellow, -1);
+
+        m.clearRect(0, 0, innerWidth, innerHeight);
+        draw.rect(0, 0, "#333", innerWidth, innerHeight);
+        for (let i = 0; i < particles.length; i++) {
+          draw.dot(
+            particles[i].x,
+            particles[i].y,
+            particles[i].color,
+            particles[i].size
+          );
+        }
+        requestAnimationFrame(update);
+      };
+
+      canvas.width = innerWidth;
+      canvas.height = innerHeight;
+      update();
+    </script>
+  </body>
+</html>

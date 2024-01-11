@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "strict": true,
+    "checkJs": true,
+    "isolatedModules": true,
+    "moduleDetection": "force"
+  }
+}

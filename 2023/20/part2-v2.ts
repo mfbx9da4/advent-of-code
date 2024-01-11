@@ -159,15 +159,16 @@ broadcaster -> a
 %j -> con
 &con -> output
 `;
-input = `
-broadcaster -> a
-%a -> b
-%b -> c
-%c -> d
-%d -> e
-%e -> con
-&con -> output
-`;
+
+// input = `
+// broadcaster -> a
+// %a -> b
+// %b -> c
+// %c -> d
+// %d -> e
+// %e -> con
+// &con -> output
+// `;
 
 // Plan:
 // 1. Construct the graph
@@ -425,7 +426,7 @@ const main = async () => {
       console.log("draw", i, lowCount * highCount);
       // console.log("low * high", lowCount * highCount);
       d3Drawing.update(graph);
-      await new Promise((resolve) => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 50));
     }
 
     d3Drawing.update(graph);
